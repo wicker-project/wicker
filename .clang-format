@@ -31,3 +31,5 @@ BreakConstructorInitializers: AfterColon
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 SeparateDefinitionBlocks: Always
 AllowShortFunctionsOnASingleLine: false
+PackConstructorInitializers: Never
+AlwaysBreakTemplateDeclarations: Yes
