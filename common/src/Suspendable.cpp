@@ -2,14 +2,16 @@
 
 using namespace common;
 
-Suspendable::Suspendable() : is_suspended_{false}, lock_{} {}
+Suspendable::Suspendable() : is_suspended_{false}, lock_{}
+{}
 
-Suspendable::~Suspendable() {}
+Suspendable::~Suspendable() = default;
 
 Suspendable::Suspendable(const Suspendable& to_copy) : is_suspended_{to_copy.is_suspended_}, lock_{}
 {}
 
-Suspendable::Suspendable(Suspendable&& to_move) : is_suspended_{to_move.is_suspended_}, lock_{} {}
+Suspendable::Suspendable(Suspendable&& to_move) : is_suspended_{to_move.is_suspended_}, lock_{}
+{}
 
 Suspendable& Suspendable::operator=(const Suspendable& to_copy_assign)
 {
