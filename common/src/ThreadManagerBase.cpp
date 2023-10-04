@@ -3,19 +3,19 @@
 #include <iostream>
 using namespace common;
 
-ThreadManagerBase::ThreadManagerBase():
+ThreadManagerBase::ThreadManagerBase() :
     state_{ManagedState::Uninitialized},
     sleep_duration_{std::chrono::microseconds(1000)},
     interrupt_signal_{}
 {}
 
-ThreadManagerBase::ThreadManagerBase(int sleep_us):
+ThreadManagerBase::ThreadManagerBase(int sleep_us) :
     state_{ManagedState::Uninitialized},
     sleep_duration_{std::chrono::microseconds(sleep_us)},
     interrupt_signal_{}
 {}
 
-ThreadManagerBase::ThreadManagerBase(ThreadManagerBase&& to_move):
+ThreadManagerBase::ThreadManagerBase(ThreadManagerBase&& to_move) :
     state_{std::move(to_move.state_)},
     sleep_duration_{std::move(to_move.sleep_duration_)},
     interrupt_signal_{}
@@ -35,7 +35,7 @@ ThreadManagerBase::~ThreadManagerBase()
 
 void ThreadManagerBase::start()
 {
-    if(state_ == ManagedState::Uninitialized)
+    if (state_ == ManagedState::Uninitialized)
     {
         std::lock_guard<std::mutex> guard{lock_};
         state_ = ManagedState::Running;
@@ -45,11 +45,10 @@ void ThreadManagerBase::start()
 
 void ThreadManagerBase::stop()
 {
-    if(state_ == ManagedState::Running || 
-       state_ == ManagedState::Suspended)
+    if (state_ == ManagedState::Running || state_ == ManagedState::Suspended)
     {
         std::lock_guard<std::mutex> guard{lock_};
-        
+
         state_ = ManagedState::Terminated;
         interrupt_signal_.notify_one();
         process_.join();
@@ -58,7 +57,7 @@ void ThreadManagerBase::stop()
 
 void ThreadManagerBase::pause()
 {
-    if(state_ == ManagedState::Running)
+    if (state_ == ManagedState::Running)
     {
         std::lock_guard<std::mutex> guard{lock_};
         state_ = ManagedState::Suspended;
@@ -67,7 +66,7 @@ void ThreadManagerBase::pause()
 
 void ThreadManagerBase::resume()
 {
-    if(state_ == ManagedState::Suspended)
+    if (state_ == ManagedState::Suspended)
     {
         std::lock_guard<std::mutex> guard{lock_};
         state_ = ManagedState::Running;
@@ -100,7 +99,7 @@ void ThreadManagerBase::sleep_duration(const int duration_us)
 
 void ThreadManagerBase::sleep()
 {
-    if(state_ == ManagedState::Running)
+    if (state_ == ManagedState::Running)
     {
         std::unique_lock<std::mutex> sleep_guard{sleep_lock_};
         interrupt_signal_.wait_for(sleep_guard, sleep_duration_);
@@ -109,12 +108,11 @@ void ThreadManagerBase::sleep()
 
 void ThreadManagerBase::thread_loop()
 {
-    //terminate thread loop upon state set to end or fault
-    while(state_ != ManagedState::Fault && 
-          state_ != ManagedState::Terminated)
+    // terminate thread loop upon state set to end or fault
+    while (state_ != ManagedState::Fault && state_ != ManagedState::Terminated)
     {
-        //only execute thread logic if set to running
-        if(state_ == ManagedState::Running)
+        // only execute thread logic if set to running
+        if (state_ == ManagedState::Running)
         {
             execute();
         }
