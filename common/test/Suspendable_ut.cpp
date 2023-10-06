@@ -12,7 +12,7 @@
 class SimpleMockSuspendable : public common::Suspendable
 {
 public:
-    SimpleMockSuspendable() {}
+    SimpleMockSuspendable() = default;
 
     std::string data(const std::string& key)
     {
