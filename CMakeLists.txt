@@ -8,8 +8,4 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_DEBUG_POSTFIX d)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_custom_target(build_tests)
-add_custom_target(WickerTests COMMAND ${CMAKE_CTEST_COMMAND})
-add_dependencies(WickerTests build_tests)
-
 add_subdirectory(common)
