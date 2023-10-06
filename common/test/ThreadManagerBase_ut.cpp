@@ -80,7 +80,7 @@ TEST_CASE("ThreadManagerBase.pause", "[common::ThreadManagerBase]")
     MockManager uut_{_::short_sleep};
     uut_.start();
     // call pause method, verify state, and note the execution count
-    uut_.pause();
+    //uut_.pause();
     REQUIRE(uut_.state() == common::ManagedState::Suspended);
     auto res = uut_.get_count();
     // wait a little while and ensure execute is no longer being called
