@@ -48,7 +48,7 @@ private:
 TEST_CASE("ThreadManagerBase.start", "[common::ThreadManagerBase]")
 {
     // create manager and ensure starting state is correct
-    auto uut_ = MockManager{_::short_sleep};
+    MockManager uut_{_::short_sleep};
     REQUIRE(uut_.state() == common::ManagedState::Uninitialized);
     // call start method and ensure state change is reflected
     uut_.start();
@@ -63,7 +63,7 @@ TEST_CASE("ThreadManagerBase.start", "[common::ThreadManagerBase]")
 TEST_CASE("ThreadManagerBase.stop", "[common::ThreadManagerBase]")
 {
     // Create manager and start operation
-    auto uut_ = MockManager{_::short_sleep};
+    MockManager uut_{_::short_sleep};
     uut_.start();
     // call stop method, verify state, and note the current count
     uut_.stop();
@@ -77,7 +77,7 @@ TEST_CASE("ThreadManagerBase.stop", "[common::ThreadManagerBase]")
 TEST_CASE("ThreadManagerBase.pause", "[common::ThreadManagerBase]")
 {
     // create manager and start operation
-    auto uut_ = MockManager{_::short_sleep};
+    MockManager uut_{_::short_sleep};
     uut_.start();
     // call pause method, verify state, and note the execution count
     uut_.pause();
