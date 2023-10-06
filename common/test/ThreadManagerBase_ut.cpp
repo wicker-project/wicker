@@ -82,8 +82,8 @@ TEST_CASE("ThreadManagerBase.pause", "[common::ThreadManagerBase]")
     // call pause method, verify state, and note the execution count
     std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
     uut_.pause();
-    REQUIRE(uut_.state() == common::ManagedState::Suspended);
     auto res = uut_.get_count();
+    REQUIRE(uut_.state() == common::ManagedState::Suspended);
     // wait a little while and ensure execute is no longer being called
     std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
     REQUIRE(res == uut_.get_count());
@@ -94,7 +94,7 @@ TEST_CASE("ThreadManagerBase.pause", "[common::ThreadManagerBase]")
 TEST_CASE("ThreadManagerBase.resume", "[common::ThreadManagerBase]")
 {
     // create manager and start operation
-    auto uut_ = MockManager{_::short_sleep};
+    MockManager uut_{_::short_sleep};
     uut_.start();
     std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
     // call pause method, verify state, and note the execution count
