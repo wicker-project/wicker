@@ -10,6 +10,12 @@
 
 namespace common
 {
+/// Private (internal namespace)
+namespace
+{
+constexpr int default_sleep_microseconds = 1000;
+}
+
 class ThreadManagerBase : public IManager
 {
 public:

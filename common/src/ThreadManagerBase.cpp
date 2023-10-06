@@ -5,7 +5,7 @@ using namespace common;
 
 ThreadManagerBase::ThreadManagerBase() :
     state_{ManagedState::Uninitialized},
-    sleep_duration_{std::chrono::microseconds(1000)},
+    sleep_duration_{std::chrono::microseconds(::default_sleep_microseconds)},
     interrupt_signal_{}
 {}
 
