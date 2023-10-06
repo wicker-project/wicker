@@ -15,10 +15,14 @@ constexpr int really_long_sleep = 5000;
 class MockManager : public common::ThreadManagerBase
 {
 public:
-    MockManager() : common::ThreadManagerBase(), i{0}
+    MockManager() :
+        common::ThreadManagerBase(),
+        i{0}
     {}
 
-    MockManager(int sleep_us) : common::ThreadManagerBase(sleep_us), i{0}
+    MockManager(int sleep_us) :
+        common::ThreadManagerBase(sleep_us),
+        i{0}
     {}
 
     void execute() override
@@ -77,8 +81,8 @@ TEST_CASE("ThreadManagerBase.pause", "[common::ThreadManagerBase]")
     uut_.start();
     // call pause method, verify state, and note the execution count
     uut_.pause();
-    auto res = uut_.get_count();
     REQUIRE(uut_.state() == common::ManagedState::Suspended);
+    auto res = uut_.get_count();
     // wait a little while and ensure execute is no longer being called
     std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
     REQUIRE(res == uut_.get_count());
