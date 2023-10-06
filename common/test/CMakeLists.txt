@@ -18,4 +18,4 @@ include(CTest)
 include(Catch)
 catch_discover_tests(WickerCommon_UT)
 
-add_test(NAME ${CMAKE_CURRENT_SOURCE_DIR} COMMAND ${CMAKE_CURRENT_SOURCE_DIR})
+add_test(NAME WickerCommon_UT COMMAND WickerCommon_UT)
