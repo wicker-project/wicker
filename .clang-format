@@ -6,7 +6,6 @@ MaxEmptyLinesToKeep: 1
 AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
 
-
 #language structure
 PointerAlignment: Left
 BreakBeforeBraces: Custom # Braces on a new line
@@ -31,3 +30,5 @@ BreakConstructorInitializers: AfterColon
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 SeparateDefinitionBlocks: Always
 AllowShortFunctionsOnASingleLine: false
+PackConstructorInitializers: Never
+AlwaysBreakTemplateDeclarations: Yes
