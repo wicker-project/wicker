@@ -1,6 +1,5 @@
 
 #include "ThreadManagerBase.hpp"
-#include <iostream>
 using namespace common;
 
 ThreadManagerBase::ThreadManagerBase() :
@@ -69,7 +68,6 @@ void ThreadManagerBase::resume()
 ManagedState ThreadManagerBase::state()
 {
     std::lock_guard<std::mutex> guard{lock_};
-    std::cout << "Current state:" << state_ << std::endl;
     return state_;
 }
 
