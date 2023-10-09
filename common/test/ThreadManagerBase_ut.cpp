@@ -1,7 +1,6 @@
 #include "ThreadManagerBase.hpp"
 #include <catch2/catch_test_macros.hpp>
 #include <chrono>
-#include <iostream>
 #include <memory>
 #include <thread>
 
@@ -90,9 +89,7 @@ TEST_CASE("ThreadManagerBase.pause|resume", "[common::ThreadManagerBase]")
     uut_.start();
     // call pause method, verify state, and note the execution count
     std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
-    std::cout << "pre-pause state:" << uut_.state() << std::endl;
     uut_.pause();
-    std::cout << "post-pause state:" << uut_.state() << std::endl;
 
     auto res = uut_.get_count();
     REQUIRE(uut_.state() == common::ManagedState::Suspended);
