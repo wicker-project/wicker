@@ -45,7 +45,7 @@ private:
     int i;
 };
 
-TEST_CASE("ThreadManagerBase.start", "[common::ThreadManagerBase]")
+TEST_CASE("ThreadManagerBase.start|stop", "[common::ThreadManagerBase]")
 {
     // create manager and ensure starting state is correct
     MockManager uut_{_::short_sleep};
@@ -56,15 +56,6 @@ TEST_CASE("ThreadManagerBase.start", "[common::ThreadManagerBase]")
     // wait a little and ensure that the execute method is being called
     std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
     REQUIRE(uut_.get_count() > 0);
-    // tear down thread manager - required for thread to join and close
-    uut_.stop();
-}
-
-TEST_CASE("ThreadManagerBase.stop", "[common::ThreadManagerBase]")
-{
-    // Create manager and start operation
-    MockManager uut_{_::short_sleep};
-    uut_.start();
     // call stop method, verify state, and note the current count
     uut_.stop();
     REQUIRE(uut_.state() == common::ManagedState::Terminated);
@@ -74,7 +65,7 @@ TEST_CASE("ThreadManagerBase.stop", "[common::ThreadManagerBase]")
     REQUIRE(res == uut_.get_count());
 }
 
-TEST_CASE("ThreadManagerBase.pause", "[common::ThreadManagerBase]")
+TEST_CASE("ThreadManagerBase.pause|resume", "[common::ThreadManagerBase]")
 {
     // create manager and start operation
     MockManager uut_{_::short_sleep};
@@ -87,19 +78,7 @@ TEST_CASE("ThreadManagerBase.pause", "[common::ThreadManagerBase]")
     // wait a little while and ensure execute is no longer being called
     std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
     REQUIRE(res == uut_.get_count());
-    // tear down thread manager - required for thread to join and close
-    uut_.stop();
-}
-
-TEST_CASE("ThreadManagerBase.resume", "[common::ThreadManagerBase]")
-{
-    // create manager and start operation
-    MockManager uut_{_::short_sleep};
-    uut_.start();
-    std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
-    // call pause method, verify state, and note the execution count
-    uut_.pause();
-    auto res = uut_.get_count();
+    // call resume method, verify state, and expect higher execution count
     uut_.resume();
     REQUIRE(uut_.state() == common::ManagedState::Running);
     // wait a little while and ensure execute has been called once again

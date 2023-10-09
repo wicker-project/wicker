@@ -7,8 +7,6 @@ add_executable(WickerCommon_UT
     ThreadManagerBase_ut.cpp
     Suspendable_ut.cpp)
 
-# assign postfix to executable
-set_target_properties(WickerCommon_UT PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 target_link_libraries(WickerCommon_UT PUBLIC 
     WickerCommonLib
     Catch2::Catch2WithMain)
