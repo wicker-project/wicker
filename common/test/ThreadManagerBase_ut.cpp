@@ -20,10 +20,28 @@ public:
         i{0}
     {}
 
-    MockManager(int sleep_us) :
+    virtual ~MockManager() = default;
+
+    explicit MockManager(int sleep_us) :
         common::ThreadManagerBase(sleep_us),
         i{0}
     {}
+
+    MockManager(const MockManager& to_copy) = delete;
+
+    MockManager(MockManager&& to_move) noexcept :
+        common::ThreadManagerBase(std::move(to_move)),
+        i{to_move.i}
+    {}
+
+    MockManager& operator=(const MockManager& to_copy_assign) = delete;
+
+    MockManager& operator=(MockManager&& to_move_assign)
+    {
+        common::ThreadManagerBase::operator=(std::move(to_move_assign));
+        i = to_move_assign.i;
+        return *this;
+    }
 
     void execute() override
     {
@@ -72,7 +90,10 @@ TEST_CASE("ThreadManagerBase.pause|resume", "[common::ThreadManagerBase]")
     uut_.start();
     // call pause method, verify state, and note the execution count
     std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
+    std::cout << "pre-pause state:" << uut_.state() << std::endl;
     uut_.pause();
+    std::cout << "post-pause state:" << uut_.state() << std::endl;
+
     auto res = uut_.get_count();
     REQUIRE(uut_.state() == common::ManagedState::Suspended);
     // wait a little while and ensure execute is no longer being called
@@ -90,7 +111,7 @@ TEST_CASE("ThreadManagerBase.pause|resume", "[common::ThreadManagerBase]")
 
 TEST_CASE("ThreadManagerBase.sleep_duration", "[common::ThreadManagerBase]")
 {
-    auto uut_ = MockManager{_::short_sleep};
+    MockManager uut_{_::short_sleep};
     // verify the initial value from construction is interpreted correctly
     REQUIRE(uut_.sleep_duration() == std::chrono::microseconds(_::short_sleep));
     // set to new microsecond value

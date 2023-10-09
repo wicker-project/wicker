@@ -15,7 +15,7 @@ ThreadManagerBase::ThreadManagerBase(int sleep_us) :
     interrupt_signal_{}
 {}
 
-ThreadManagerBase::ThreadManagerBase(ThreadManagerBase&& to_move) :
+ThreadManagerBase::ThreadManagerBase(ThreadManagerBase&& to_move) noexcept :
     state_{std::move(to_move.state_)},
     sleep_duration_{std::move(to_move.sleep_duration_)},
     interrupt_signal_{}
@@ -30,7 +30,7 @@ ThreadManagerBase& ThreadManagerBase::operator=(ThreadManagerBase&& to_move_assi
 
 ThreadManagerBase::~ThreadManagerBase()
 {
-    stop();
+    teardown_thread();
 }
 
 void ThreadManagerBase::start()
@@ -45,13 +45,7 @@ void ThreadManagerBase::start()
 
 void ThreadManagerBase::stop()
 {
-    std::lock_guard<std::mutex> guard{lock_};
-    if (state_ == ManagedState::Running || state_ == ManagedState::Suspended)
-    {
-        state_ = ManagedState::Terminated;
-        interrupt_signal_.notify_one();
-        process_.join();
-    }
+    teardown_thread();
 }
 
 void ThreadManagerBase::pause()
@@ -75,6 +69,7 @@ void ThreadManagerBase::resume()
 ManagedState ThreadManagerBase::state()
 {
     std::lock_guard<std::mutex> guard{lock_};
+    std::cout << "Current state:" << state_ << std::endl;
     return state_;
 }
 
@@ -115,5 +110,16 @@ void ThreadManagerBase::thread_loop()
         {
             execute();
         }
+    }
+}
+
+void ThreadManagerBase::teardown_thread()
+{
+    std::lock_guard<std::mutex> guard{lock_};
+    if (state_ == ManagedState::Running || state_ == ManagedState::Suspended)
+    {
+        state_ = ManagedState::Terminated;
+        interrupt_signal_.notify_one();
+        process_.join();
     }
 }
