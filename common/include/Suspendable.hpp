@@ -68,8 +68,8 @@ public:
     bool is_suspended();
 
 private:
-    std::mutex lock_;   // lock providing thread safety
     bool is_suspended_; // flow control boolean
+    std::mutex lock_;   // lock providing thread safety
 };
 } // namespace common
 
