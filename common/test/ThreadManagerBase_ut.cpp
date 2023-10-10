@@ -92,7 +92,7 @@ TEST_CASE("ThreadManagerBase.pause|resume", "[common::ThreadManagerBase]")
     uut_.pause();
 
     // TODO: Fix this and make it work with pipelines
-    //  auto res = uut_.get_count();
+    auto res = uut_.get_count();
     //  REQUIRE(uut_.state() == common::ManagedState::Suspended);
     //   wait a little while and ensure execute is no longer being called
     //  std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
