@@ -17,9 +17,18 @@ code, as long as you include this copyright statement.
 In particular, you can use software distributed by The Wicker Project to build 
 proprietary software and are under no obligation to redistribute any of your 
 source code that is built using Wicker Project Software. Note however, that 
-you may not do anything to the software, such as copyrighting it yourself or 
-claiming authorship of Wicker Project Software, that will prevent it from being 
-distributed freely using an open source development model.
+you may not do anything to software distributed by The Wicker Project, such 
+as copyrighting it yourself or claiming authorship of Wicker Project Software, 
+that will prevent it from being distributed freely using an open source 
+development model. 
+
+If you choose to modify Wicker Project Software, you are able to do so as a 
+private fork and maintain the project for your own use. In doing so, you may 
+update the copyright statement to your own, copyright if and only if you do 
+so with the inclusion of the following statement:
+
+"This code is a private fork of software developed by The Wicker Project under 
+a free and open source software license (Modified MIT)."
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Wicker Project Software.
