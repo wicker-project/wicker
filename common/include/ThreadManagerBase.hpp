@@ -16,6 +16,9 @@ namespace
 constexpr int default_sleep_microseconds = 1000;
 }
 
+/**
+ * @brief Base class for writing specialized thread manager classes.
+ */
 class ThreadManagerBase : public IManager
 {
 public:
@@ -124,10 +127,10 @@ protected:
      */
     virtual void execute() = 0;
 
-    std::mutex lock_;                          // lock for entire manager
-    ManagedState state_;                       // state value for manager
-    std::thread process_;                      // execution thread for managed content
-    std::chrono::microseconds sleep_duration_; // duration of a sleep cycle
+    std::mutex lock_;                          ///< lock for entire manager
+    ManagedState state_;                       ///< state value for manager
+    std::thread process_;                      ///< execution thread for managed content
+    std::chrono::microseconds sleep_duration_; ///< duration of a sleep cycle
 
 private:
     /**
