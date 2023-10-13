@@ -26,6 +26,11 @@ public:
         i{0}
     {}
 
+    explicit MockManager(std::chrono::microseconds(sleep_us)) :
+        common::ThreadManagerBase(sleep_us),
+        i{0}
+    {}
+
     MockManager(const MockManager& to_copy) = delete;
 
     MockManager(MockManager&& to_move) noexcept :
@@ -62,10 +67,39 @@ private:
     int i;
 };
 
+TEST_CASE("ThreadManagerBase.defaultCtor")
+{
+    MockManager uut_{};
+    REQUIRE(uut_.state() == common::ManagedState::Uninitialized);
+    REQUIRE(uut_.sleep_duration() == std::chrono::microseconds(common::default_sleep_microseconds));
+}
+
+TEST_CASE("ThreadManagerBase.moveCtor")
+{
+    MockManager original{_::really_long_sleep};
+
+    // start and stop thread to change state to Terminated
+    original.start();
+    std::this_thread::sleep_for(std::chrono::microseconds(_::long_sleep));
+    original.stop();
+    MockManager uut_{std::move(original)};
+    REQUIRE(uut_.state() == common::ManagedState::Terminated);
+    REQUIRE(uut_.sleep_duration() == std::chrono::microseconds(_::really_long_sleep));
+}
+
+TEST_CASE("ThreadManagerBase.moveAssign")
+{
+    MockManager original{_::really_long_sleep};
+    MockManager uut_;
+    uut_ = std::move(original);
+    REQUIRE(uut_.state() == common::ManagedState::Uninitialized);
+    REQUIRE(uut_.sleep_duration() == std::chrono::microseconds(_::really_long_sleep));
+}
+
 TEST_CASE("ThreadManagerBase.start|stop", "[common::ThreadManagerBase]")
 {
     // create manager and ensure starting state is correct
-    MockManager uut_{_::short_sleep};
+    MockManager uut_{std::chrono::microseconds(_::short_sleep)};
     REQUIRE(uut_.state() == common::ManagedState::Uninitialized);
     // call start method and ensure state change is reflected
     uut_.start();

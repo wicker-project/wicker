@@ -8,9 +8,15 @@ ThreadManagerBase::ThreadManagerBase() :
     interrupt_signal_{}
 {}
 
-ThreadManagerBase::ThreadManagerBase(int sleep_us) :
+ThreadManagerBase::ThreadManagerBase(int sleep_duration_us) :
     state_{ManagedState::Uninitialized},
-    sleep_duration_{std::chrono::microseconds(sleep_us)},
+    sleep_duration_{std::chrono::microseconds(sleep_duration_us)},
+    interrupt_signal_{}
+{}
+
+ThreadManagerBase::ThreadManagerBase(std::chrono::microseconds sleep_duration) :
+    state_{ManagedState::Uninitialized},
+    sleep_duration_{sleep_duration},
     interrupt_signal_{}
 {}
 
