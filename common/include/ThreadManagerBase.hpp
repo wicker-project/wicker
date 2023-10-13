@@ -29,9 +29,15 @@ public:
 
     /**
      * @brief Construct a new Thread Manager Base object
-     * @param sleep_us sleep time in microseconds
+     * @param sleep_duration_us sleep time in microseconds
      */
-    explicit ThreadManagerBase(int sleep_us);
+    explicit ThreadManagerBase(int sleep_duration_us);
+
+    /**
+     * @brief Construct a new Thread Manager Base object
+     * @param sleep_duration sleep time in microseconds
+     */
+    explicit ThreadManagerBase(std::chrono::microseconds sleep_duration);
 
     /**
      * @brief Copy construct a new Thread Manager Base object
