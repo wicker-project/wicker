@@ -14,6 +14,27 @@ class SimpleMockSuspendable : public common::Suspendable
 public:
     SimpleMockSuspendable() = default;
 
+    ~SimpleMockSuspendable() = default;
+
+    SimpleMockSuspendable(const SimpleMockSuspendable& to_copy) = default;
+
+    SimpleMockSuspendable(SimpleMockSuspendable&& to_move) :
+        common::Suspendable(std::move(to_move)),
+        data_{std::move(to_move.data_)}
+    {}
+
+    SimpleMockSuspendable& operator=(const SimpleMockSuspendable& to_copy_assign)
+    {
+        common::Suspendable::operator=(to_copy_assign);
+        return *this;
+    }
+
+    SimpleMockSuspendable& operator=(SimpleMockSuspendable&& to_move_assign)
+    {
+        common::Suspendable::operator=(std::move(to_move_assign));
+        return *this;
+    }
+
     std::string data(const std::string& key)
     {
         if (!is_suspended())
@@ -33,6 +54,46 @@ private:
     const std::unordered_map<std::string, std::string> data_{
         {"Apple", "Orange"}, {"Hammer", "Nail"}, {"Salt", "Pepper"}};
 };
+
+TEST_CASE("Suspendable.defaultCtor", "[common::suspendable]")
+{
+    SimpleMockSuspendable uut_{};
+    REQUIRE_FALSE(uut_.is_suspended());
+}
+
+TEST_CASE("Suspendable.copyConstructor", "[common::suspendable]")
+{
+    SimpleMockSuspendable original{};
+    original.suspend();
+    SimpleMockSuspendable uut_{original};
+    REQUIRE(uut_.is_suspended());
+}
+
+TEST_CASE("Suspendable.copyAssignment", "[common::suspendable]")
+{
+    SimpleMockSuspendable original{};
+    original.suspend();
+    SimpleMockSuspendable uut_;
+    uut_ = original;
+    REQUIRE(uut_.is_suspended());
+}
+
+TEST_CASE("Suspendable.moveConstructor", "[common::suspendable]")
+{
+    SimpleMockSuspendable original{};
+    original.suspend();
+    SimpleMockSuspendable uut_{std::move(original)};
+    REQUIRE(uut_.is_suspended());
+}
+
+TEST_CASE("Suspendable.moveAssignment", "[common::suspendable]")
+{
+    SimpleMockSuspendable original{};
+    original.suspend();
+    SimpleMockSuspendable uut_;
+    uut_ = std::move(original);
+    REQUIRE(uut_.is_suspended());
+}
 
 TEST_CASE("Suspendable.suspend", "[common::Suspendable]")
 {
