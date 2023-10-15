@@ -30,10 +30,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@latest
-      - uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: dia doxygen doxygen-doc doxygen-gui doxygen-latex graphviz mscgen
-          version: 1.0
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: dia doxygen doxygen-doc doxygen-gui doxygen-latex graphviz mscgen
+        version: 1.0
 
     - name: Build Catch2 from Source
       run: |
