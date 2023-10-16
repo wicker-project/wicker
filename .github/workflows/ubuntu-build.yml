@@ -34,6 +34,9 @@ jobs:
       - name: Cache doxygen
         id: cache-doxygen
         uses: actions/cache@v3.3.2
+        with:
+          path: "/usr/bin/doxygen"
+          key: ${{ runner.os }}-doxygen
         
 
   build:
