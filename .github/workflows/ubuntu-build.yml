@@ -16,21 +16,24 @@ jobs:
   install_build_deps:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/cache@v3.3.2
+      - uses: actions/checkout@v4
       - name: Cache Catch2
         id: cache-catch2
+        uses: actions/cache@v3.3.2
         with: 
           path: "/usr/local/include/Catch2"
           key: ${{ runner.os }}-Catch2
+          
       - name: Cache lcov
-      - uses: actions/cache@v3.3.2
         id: cache-lcov
+        uses: actions/cache@v3.3.2
         with:
           path: "/usr/bin/lcov"
           key: ${{ runner.os }}-lcov
+          
       - name: Cache doxygen
-      - uses: actions/cache@v3.3.2
         id: cache-doxygen
+        uses: actions/cache@v3.3.2
         
 
   build:
