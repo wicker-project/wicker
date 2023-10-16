@@ -16,8 +16,8 @@ jobs:
   install_build_deps:
     runs-on: ubuntu-latest
     steps:
-      - name: Cache Catch2
       - uses: actions/cache@v3.3.2
+      - name: Cache Catch2
         id: cache-catch2
         with: 
           path: "/usr/local/include/Catch2"
