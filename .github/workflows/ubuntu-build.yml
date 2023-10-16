@@ -16,26 +16,28 @@ jobs:
   install_build_deps:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/cache@v3
-      - name: Cache lcov 
-        id: chache-lcov
-        if: startsWith(runner.os, 'Linux')
+      - name: Cache Catch2
+      - uses: actions/cache@v3.3.2
+        id: cache-catch2
+        with: 
+          path: "/usr/local/include/Catch2"
+          key: ${{ runner.os }}-Catch2
+      - name: Cache lcov
+      - uses: actions/cache@v3.3.2
+        id: cache-lcov
         with:
           path: "/usr/bin/lcov"
           key: ${{ runner.os }}-lcov
       - name: Cache doxygen
+      - uses: actions/cache@v3.3.2
         id: cache-doxygen
-        if: startsWith(runner.os, 'Linux')
-        with:
-          path: "/usr/bin/doxygen"
-          key: ${{ runner.os }}-lcov
+        
 
   build:
     # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
     # You can convert this to a matrix build if you need cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     
