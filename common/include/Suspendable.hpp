@@ -35,20 +35,8 @@ public:
      */
     Suspendable(Suspendable&& to_move);
 
-    /**
-     * @brief Copy assignment operator
-     *
-     * @param to_copy_assign RHS to copy from
-     * @return Suspendable& LHS to assign to
-     */
     Suspendable& operator=(const Suspendable& to_copy_assign);
 
-    /**
-     * @brief Move assignment operator
-     *
-     * @param to_move_assign RHS to move from
-     * @return Suspendable& LHS to assign to
-     */
     Suspendable& operator=(Suspendable&& to_move_assign);
 
     /**
