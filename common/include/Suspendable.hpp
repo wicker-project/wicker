@@ -1,5 +1,5 @@
-#ifndef COMMON_SUSPENDABLE_H
-#define COMMON_SUSPENDABLE_H
+#ifndef COMMON_SUSPENDABLE_HPP_
+#define COMMON_SUSPENDABLE_HPP_
 
 #include <memory>
 #include <mutex>
@@ -73,4 +73,4 @@ private:
 };
 } // namespace common
 
-#endif // COMMON_SUSPENDABLE_H
+#endif // COMMON_SUSPENDABLE_HPP_
