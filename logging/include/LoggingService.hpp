@@ -37,24 +37,18 @@ public:
      * @brief Singleton instance allocation method
      * @return LoggingService* pointer to singleton instance
      */
-    static LoggingService* get();
+    static LoggingService* get_instance();
 
 protected:
     /**
      * @brief Construct a new Logging Service object
      */
-    LoggingService();
+    LoggingService() = default;
 
     /**
      * @brief Destroy the Logging Service object
      */
-    ~LoggingService();
-
-    /**
-     * @brief Construct a new Logging Service object with configuration data
-     * @param log_config configuration string
-     */
-    LoggingService(const std::string& log_config);
+    ~LoggingService() = default;
 
 private:
     /// pointer to singleton instance
@@ -63,10 +57,6 @@ private:
     /// thread safe mutex
     static std::mutex lock_;
 };
-
-LoggingService* LoggingService::singleton_{nullptr};
-std::mutex LoggingService::lock_;
-
 } // namespace logging
 
 #endif // LOGGING_LOGGING_SERVICE_HPP_
