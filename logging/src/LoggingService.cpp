@@ -1,5 +1,6 @@
 #include "LoggingService.hpp"
 #include <iostream>
+#include <memory>
 
 using namespace logging;
 
@@ -17,18 +18,45 @@ LoggingService* LoggingService::get_instance()
     return singleton_;
 }
 
-void LoggingService::add_logger(Logger&& logger)
+bool LoggingService::add_logger(const Logger& logger)
 {
-    loggers[logger.id()] = std::move(logger);
-}
+    // ensure service is setup before calling
+    get_instance();
 
-bool LoggingService::remove_logger(std::string& logger_id)
-{
-    std::lock_guard<std::mutex> guard{lock_};
-    if (loggers.find(logger_id) != singleton_->loggers.cend())
+    if (singleton_->loggers_.find(logger.id()) == singleton_->loggers_.cend())
     {
-        // return true if something is erased, else false
-        return loggers.erase(logger_id) > 0;
+        singleton_->loggers_[logger.id()] = std::make_unique<Logger>(logger);
+        return true;
     }
     return false;
+}
+
+bool LoggingService::remove_logger(const std::string logger_id)
+{
+    // ensure service is setup before calling
+    get_instance();
+
+    std::lock_guard<std::mutex> guard{lock_};
+    if (singleton_->loggers_.find(logger_id) != singleton_->loggers_.cend())
+    {
+        // return true if something is erased, else false
+        return singleton_->loggers_.erase(logger_id) > 0;
+    }
+    return false;
+}
+
+Logger* LoggingService::logger(const std::string logger_id)
+{
+    // ensure service is setup before calling
+    get_instance();
+
+    // return raw pointer to logger if found
+    std::lock_guard<std::mutex> guard{lock_};
+    auto res = singleton_->loggers_.find(logger_id);
+    if (res != singleton_->loggers_.cend())
+    {
+        return res->second.get();
+    }
+    // else return nullptr
+    return nullptr;
 }

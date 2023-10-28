@@ -17,10 +17,14 @@ public:
     Logger()
     {}
 
+    Logger(std::string id) :
+        id_{id}
+    {}
+
     ~Logger() = default;
 
     // data accessors
-    std::string id()
+    std::string id() const
     {
         return id_;
     }

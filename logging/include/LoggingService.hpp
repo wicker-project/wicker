@@ -36,27 +36,32 @@ public:
     void operator=(LoggingService&& to_move_assign) = delete;
 
     /**
-     * @brief Singleton instance allocation method
-     * @return LoggingService* pointer to singleton instance
-     */
-    static LoggingService* get_instance();
-
-    /**
      * @brief Add a new logger to the service
      * @param logger logger to move into service
      */
-    void LoggingService::add_logger(Logger&& logger);
+    static bool add_logger(const Logger& logger);
 
     /**
      * @brief remove an existing logger from the service
      * @param logger_id id of the target logger
      * @return true if logger found and removed, else false
      */
-    bool remove_logger(std::string& logger_id);
+    static bool remove_logger(const std::string logger_id);
 
-    Logger* get_logger(std::string& logger_id);
+    /**
+     * @brief Retrieves existing logger from service
+     * @param logger_id id of logger to use
+     * @return Logger* pointer to logger, or nullptr if no id match
+     */
+    static Logger* logger(const std::string logger_id);
 
 protected:
+    /**
+     * @brief Singleton instance allocation method
+     * @return LoggingService* pointer to singleton instance
+     */
+    static LoggingService* get_instance();
+
     /**
      * @brief Construct a new Logging Service object
      */
@@ -68,7 +73,7 @@ protected:
     ~LoggingService() = default;
 
     /// map of all valid loggers
-    std::unordered_map<std::string, Logger> loggers{};
+    std::unordered_map<std::string, std::unique_ptr<Logger>> loggers_{};
 
 private:
     /// pointer to singleton instance
