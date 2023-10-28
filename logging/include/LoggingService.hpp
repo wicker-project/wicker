@@ -1,8 +1,10 @@
 #ifndef LOGGING_LOGGING_SERVICE_HPP_
 #define LOGGING_LOGGING_SERVICE_HPP_
 
+#include "Logger.hpp"
 #include <memory>
 #include <mutex>
+#include <unordered_map>
 
 namespace logging
 {
@@ -39,6 +41,21 @@ public:
      */
     static LoggingService* get_instance();
 
+    /**
+     * @brief Add a new logger to the service
+     * @param logger logger to move into service
+     */
+    void LoggingService::add_logger(Logger&& logger);
+
+    /**
+     * @brief remove an existing logger from the service
+     * @param logger_id id of the target logger
+     * @return true if logger found and removed, else false
+     */
+    bool remove_logger(std::string& logger_id);
+
+    Logger* get_logger(std::string& logger_id);
+
 protected:
     /**
      * @brief Construct a new Logging Service object
@@ -50,10 +67,12 @@ protected:
      */
     ~LoggingService() = default;
 
+    /// map of all valid loggers
+    std::unordered_map<std::string, Logger> loggers{};
+
 private:
     /// pointer to singleton instance
     static LoggingService* singleton_;
-
     /// thread safe mutex
     static std::mutex lock_;
 };
