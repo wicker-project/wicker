@@ -1,7 +1,9 @@
 #include "LoggingService.hpp"
+#include "filters/LevelFilter.hpp"
 #include <iostream>
 #include <memory>
 
+using namespace wicker;
 using namespace logging;
 
 // definition of static object instances

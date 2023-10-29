@@ -6,6 +6,8 @@
 #include <mutex>
 #include <unordered_map>
 
+namespace wicker
+{
 namespace logging
 {
 class LoggingService
@@ -82,5 +84,6 @@ private:
     static std::mutex lock_;
 };
 } // namespace logging
+} // namespace wicker
 
 #endif // LOGGING_LOGGING_SERVICE_HPP_

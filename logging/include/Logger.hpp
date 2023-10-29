@@ -5,6 +5,8 @@
 #include <mutex>
 #include <string>
 
+namespace wicker
+{
 namespace logging
 {
 /**
@@ -36,5 +38,6 @@ protected:
 };
 
 } // namespace logging
+} // namespace wicker
 
 #endif // LOGGING_LOGGER_HPP_

@@ -1,14 +1,15 @@
-#ifndef LOGGING_RECORD_HPP_
-#define LOGGING_RECORD_HPP_
+#ifndef LOGGING_UTILS_HPP_
+#define LOGGING_UTILS_HPP_
 
 #include <chrono>
 #include <string>
 
+namespace wicker
+{
 namespace logging
 {
 enum LogLevel
 {
-    invalid = -1,
     all,
     trace,
     debug,
@@ -18,7 +19,7 @@ enum LogLevel
     fatal
 };
 
-std::string log_level(const LogLevel value)
+static std::string log_level(const LogLevel value)
 {
     switch (value)
     {
@@ -52,8 +53,12 @@ std::string log_level(const LogLevel value)
 struct Record
 {
     std::chrono::system_clock::time_point timestamp_{std::chrono::system_clock::now()};
+    LogLevel level_{LogLevel::all};
+    std::string message_{""};
+    std::string logger_id_{""};
 };
 
 } // namespace logging
+} // namespace wicker
 
-#endif // LOGGING_RECORD_HPP_
+#endif // LOGGING_UTILS_HPP_
