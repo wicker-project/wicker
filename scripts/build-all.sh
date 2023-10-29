@@ -38,6 +38,6 @@ echo "====================================================="
 echo "Generating in-depth coverage report"
 echo "====================================================="
 lcov -c --directory . --output-file ./lcov.info
-lcov --remove ./lcov.info -o ./lcov.info '/usr/include/*' '/usr/local/include/*' '/usr/lib/*' 
+lcov --remove ./lcov.info -o ./lcov.info '/usr/include/*' '/usr/local/include/*' '/usr/lib/*' '*/test/*'
 genhtml ./lcov.info --output-directory coverage 
 cd .. #return back to main project directory
