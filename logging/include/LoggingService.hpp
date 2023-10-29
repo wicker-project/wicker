@@ -10,6 +10,7 @@ namespace wicker
 {
 namespace logging
 {
+/// @brief Singleton service to manage all application loggers
 class LoggingService
 {
 public:

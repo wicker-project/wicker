@@ -27,7 +27,7 @@ bool LoggingService::add_logger(const Logger& logger)
 
     if (singleton_->loggers_.find(logger.id()) == singleton_->loggers_.cend())
     {
-        singleton_->loggers_[logger.id()] = std::make_unique<Logger>(logger);
+        singleton_->loggers_[logger.id()] = std::move(std::make_unique<Logger>(logger));
         return true;
     }
     return false;

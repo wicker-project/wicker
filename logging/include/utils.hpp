@@ -8,6 +8,8 @@ namespace wicker
 {
 namespace logging
 {
+
+/// @brief Enumeration for all log level definition and order
 enum LogLevel
 {
     all,
@@ -19,7 +21,13 @@ enum LogLevel
     fatal
 };
 
-static std::string log_level(const LogLevel value)
+/**
+ * @brief Static method to generate a formatted string from LogLevel value
+ *
+ * @param value LogLevel value to get formatted string for
+ * @return std::string formatted string matching log level
+ */
+static std::string log_level_string(const LogLevel value)
 {
     switch (value)
     {
@@ -50,11 +58,18 @@ static std::string log_level(const LogLevel value)
     }
 }
 
+/**
+ * @brief Structure defining a singular log entry record.
+ */
 struct Record
 {
+    /// @brief timestamp at the moment of creation for the record
     std::chrono::system_clock::time_point timestamp_{std::chrono::system_clock::now()};
+    /// @brief LogLevel for the record
     LogLevel level_{LogLevel::all};
+    /// @brief User's message for the record
     std::string message_{""};
+    /// @brief Id of the logger that generated this record
     std::string logger_id_{""};
 };
 
