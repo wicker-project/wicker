@@ -1,7 +1,7 @@
 #ifndef LOGGING_LOGGER_HPP_
 #define LOGGING_LOGGER_HPP_
 
-#include "filters/IFilter.hpp"
+#include "filters/Filterable.hpp"
 #include "utils.hpp"
 #include <memory>
 #include <mutex>
@@ -16,7 +16,7 @@ namespace logging
  * @brief Logger used to log data to specified targets
  *
  */
-class Logger
+class Logger : public Filterable
 {
 public:
     Logger() :
