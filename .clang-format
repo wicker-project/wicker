@@ -32,3 +32,5 @@ SeparateDefinitionBlocks: Always
 AllowShortFunctionsOnASingleLine: false
 PackConstructorInitializers: Never
 AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false

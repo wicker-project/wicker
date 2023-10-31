@@ -9,6 +9,7 @@ TEST_CASE("LevelFilter::default values")
     // ensure default filter values are log level all, with minimum type (all inclusive)
     REQUIRE(uut.acceptance_level() == LogLevel::all);
     REQUIRE(uut.acceptance_type() == AcceptanceType::min);
+    REQUIRE(uut.name() == "LevelFilter");
 }
 
 TEST_CASE("LevelFilter.execute minimum strategy")

@@ -29,10 +29,10 @@ public:
 
     ~Logger() = default;
 
-    Logger(const Logger& to_copy);
-    Logger(Logger&& to_move);
-    Logger& operator=(const Logger& to_copy_assign);
-    Logger& operator=(Logger&& to_move_assign);
+    // Logger(const Logger& to_copy);
+    // Logger(Logger&& to_move);
+    // Logger& operator=(const Logger& to_copy_assign);
+    // Logger& operator=(Logger&& to_move_assign);
 
     // data accessors
     inline std::string id() const
@@ -41,13 +41,13 @@ public:
     }
 
     // Logging API functions
-    void all(std::string&& message);
-    void trace(std::string&& message);
-    void debug(std::string&& message);
-    void info(std::string&& message);
-    void warning(std::string&& message);
-    void error(std::string&& message);
-    void fatal(std::string&& message);
+    // void all(std::string&& message);
+    // void trace(std::string&& message);
+    // void debug(std::string&& message);
+    // void info(std::string&& message);
+    // void warning(std::string&& message);
+    // void error(std::string&& message);
+    // void fatal(std::string&& message);
 
 protected:
     std::string id_{"root"};

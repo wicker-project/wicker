@@ -29,13 +29,14 @@ class LevelFilter : public IFilter
 public:
     /**
      * @brief Construct a new Level Filter object
-     *
      * @param acceptance_level log level to base acceptance strategy off of. Defaults to
      * LogLevel::all.
      * @param acceptance_type  acceptance strategy. Defaults to AcceptanceType::min.
+     * @param name name of filter. Defaults to "LevelFilter"
      */
     LevelFilter(LogLevel acceptance_level = LogLevel::all,
-                AcceptanceType acceptance_type = AcceptanceType::min);
+                AcceptanceType acceptance_type = AcceptanceType::min,
+                std::string name = "LevelFilter");
 
     /**
      * @brief Destroy the Level Filter object
@@ -52,7 +53,7 @@ public:
      * @brief Move construct a new Level Filter object
      * @param to_move LevelFilter to move from
      */
-    LevelFilter(LevelFilter&& to_move);
+    LevelFilter(LevelFilter&& to_move) noexcept;
 
     /**
      * @brief Copy assignment operator

@@ -3,32 +3,29 @@
 using namespace wicker;
 using namespace logging;
 
-LevelFilter::LevelFilter(LogLevel acceptance_level, AcceptanceType acceptance_type) :
+LevelFilter::LevelFilter(LogLevel acceptance_level,
+                         AcceptanceType acceptance_type,
+                         std::string name) :
+    IFilter(name),
     acceptance_level_{acceptance_level},
     acceptance_type_{acceptance_type}
 {}
 
-LevelFilter::LevelFilter(const LevelFilter& to_copy) :
-    acceptance_level_{to_copy.acceptance_level_},
-    acceptance_type_{to_copy.acceptance_type_}
-{}
+LevelFilter::LevelFilter(const LevelFilter& to_copy) = default;
 
-LevelFilter::LevelFilter(LevelFilter&& to_move) :
+LevelFilter::LevelFilter(LevelFilter&& to_move) noexcept :
+    IFilter(to_move),
     acceptance_level_{to_move.acceptance_level_},
     acceptance_type_{to_move.acceptance_type_}
 {}
 
-LevelFilter& LevelFilter::operator=(const LevelFilter& to_copy_assign)
-{
-    acceptance_level_ = to_copy_assign.acceptance_level_;
-    acceptance_type_ = to_copy_assign.acceptance_type_;
-    return *this;
-}
+LevelFilter& LevelFilter::operator=(const LevelFilter& to_copy_assign) = default;
 
 LevelFilter& LevelFilter::operator=(LevelFilter&& to_move_assign)
 {
     acceptance_level_ = to_move_assign.acceptance_level_;
     acceptance_type_ = to_move_assign.acceptance_type_;
+    IFilter::operator=(std::move(to_move_assign));
     return *this;
 }
 

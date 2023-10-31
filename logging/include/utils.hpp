@@ -71,6 +71,10 @@ struct Record
     std::string message_{""};
     /// @brief Id of the logger that generated this record
     std::string logger_id_{""};
+    /// @brief String detailing time format
+    std::string time_format{""};
+    /// @brief String detailing entire record format
+    std::string record_format{""};
 };
 
 } // namespace logging
