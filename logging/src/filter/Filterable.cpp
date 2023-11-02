@@ -1,4 +1,4 @@
-#include "filters/Filterable.hpp"
+#include "filter/Filterable.hpp"
 
 using namespace wicker;
 using namespace logging;

@@ -1,5 +1,5 @@
 #include "LoggingService.hpp"
-#include "filters/LevelFilter.hpp"
+#include "filter/LevelFilter.hpp"
 #include <iostream>
 #include <memory>
 

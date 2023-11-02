@@ -29,7 +29,7 @@ public:
      * @brief Construct a new Target Base object with existing stream
      * @param stream shared pointer to an iostream to use as internal stream
      */
-    explicit TargetBase(std::shared_ptr<std::iostream> stream);
+    explicit TargetBase(std::ostream& stream);
 
     /**
      * @brief Copy construct a new Target Base object
@@ -65,25 +65,25 @@ public:
 
     /**
      * @brief Get accessor for pointer to internal stream
-     * @return std::shared_ptr<std::iostream> pointer to internal stream
+     * @return std::ostream& reference to internal stream
      */
-    inline std::shared_ptr<std::iostream> stream()
+    inline std::ostream& stream()
     {
-        return stream_;
+        return *stream_;
     }
 
     /**
      * @brief Set accessor for pointer to internal stream
-     * @param stream shared pointer to stream to use as internal stream
+     * @param stream reference stream to use as internal stream
      */
-    inline void stream(std::shared_ptr<std::iostream> stream)
+    inline void stream(std::ostream& stream)
     {
-        stream_ = stream;
+        stream_ = &stream;
     }
 
 protected:
-    /// @brief shared pointer to the target stream
-    std::shared_ptr<std::iostream> stream_{nullptr};
+    /// @brief pointer to the target stream
+    std::ostream* stream_{nullptr};
 };
 } // namespace logging
 } // namespace wicker

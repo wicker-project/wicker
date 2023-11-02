@@ -30,21 +30,21 @@ TEST_CASE("TargetBase: copy semantics")
 {
     auto terminal_target = std::make_shared<std::stringstream>();
     _::test_stream = std::static_pointer_cast<std::iostream>(terminal_target);
+    std::stringbuf buffer{};
+
     // create new TargetBase with copy
     TargetBase copy_target{_::test_stream};
-    // load the buffer
+    // load the buffer and verify data is correct
     copy_target.write(_::payload);
-    std::stringbuf copy_buffer{};
-    copy_target.stream()->get(copy_buffer);
-    REQUIRE(copy_buffer.str() == _::payload);
+    copy_target.stream()->get(buffer);
+    REQUIRE(buffer.str() == _::payload);
 
     // create new TargetBase with copy assign
-    auto copy_assigned_target = TargetBase(_::test_stream);
-    // reload the buffer
+    auto copy_assigned_target = TargetBase{_::test_stream};
+    // reload the buffer and verify data is correct
     copy_assigned_target.write(_::payload);
-    std::stringbuf copy_assign_buffer{};
-    copy_assigned_target.stream()->get(copy_assign_buffer);
-    REQUIRE(copy_assign_buffer.str() == _::payload);
+    copy_assigned_target.stream()->get(buffer);
+    REQUIRE(buffer.str() == _::payload);
 }
 
 /*

@@ -1,7 +1,7 @@
 #ifndef LOGGING_LOGGER_HPP_
 #define LOGGING_LOGGER_HPP_
 
-#include "filters/Filterable.hpp"
+#include "filter/Filterable.hpp"
 #include "utils.hpp"
 #include <memory>
 #include <mutex>

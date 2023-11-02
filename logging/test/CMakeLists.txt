@@ -6,8 +6,8 @@ add_executable(WickerLogging_UT
     ${PROJECT_SOURCE_DIR}/Catch2TestMain.cpp
     LoggingService_ut.cpp
     TargetBase_ut.cpp
-    filters/LevelFilter_ut.cpp
-    filters/Filterable_ut.cpp)
+    filter/LevelFilter_ut.cpp
+    filter/Filterable_ut.cpp)
 
 target_link_libraries(WickerLogging_UT PUBLIC 
     WickerLoggingLib

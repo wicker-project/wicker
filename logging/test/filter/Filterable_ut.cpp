@@ -1,5 +1,5 @@
-#include "filters/Filterable.hpp"
-#include "filters/LevelFilter.hpp"
+#include "filter/Filterable.hpp"
+#include "filter/LevelFilter.hpp"
 #include <catch2/catch_test_macros.hpp>
 #include <memory>
 
