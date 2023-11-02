@@ -1,13 +1,14 @@
 add_library(WickerLoggingLib
     LoggingService.cpp
-    target/TargetBase.cpp
-    target/
+    target/StreamTarget.cpp
     filter/LevelFilter.cpp
     filter/Filterable.cpp
     )
 
+set(LoggingLibIncludeDir logging/include/logging)
+
 target_include_directories(WickerLoggingLib PUBLIC 
-    ${PROJECT_SOURCE_DIR}/logging/include/logging
-    ${PROJECT_SOURCE_DIR}/logging/include/logging/filter
-    ${PROJECT_SOURCE_DIR}/logging/include/logging/target
+    ${PROJECT_SOURCE_DIR}/${LoggingLibIncludeDir}
+    ${PROJECT_SOURCE_DIR}/${LoggingLibIncludeDir}/filter
+    ${PROJECT_SOURCE_DIR}/${LoggingLibIncludeDir}/target
     )

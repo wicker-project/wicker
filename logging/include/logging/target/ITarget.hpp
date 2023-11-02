@@ -17,7 +17,7 @@ public:
      *
      * @param payload
      */
-    virtual void write(std::string& payload) = 0;
+    virtual void write(const std::string& payload) = 0;
 };
 } // namespace logging
 } // namespace wicker

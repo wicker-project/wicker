@@ -12,4 +12,4 @@ enable_testing()
 
 add_subdirectory(common)
 add_subdirectory(logging)
-add_subdirectory(demo)
+add_subdirectory(examples)
