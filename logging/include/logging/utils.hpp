@@ -24,12 +24,12 @@ enum LogLevel
     fatal
 };
 
-/**
- * @brief Static method to generate a formatted string from LogLevel value
- *
- * @param value LogLevel value to get formatted string for
- * @return std::string formatted string matching log level
- */
+// /**
+//  * @brief Static method to generate a formatted string from LogLevel value
+//  *
+//  * @param value LogLevel value to get formatted string for
+//  * @return std::string formatted string matching log level
+//  */
 // static std::string log_level_string(const LogLevel value)
 //{
 //     switch (value)

@@ -6,6 +6,16 @@
 using namespace wicker;
 using namespace logging;
 
+/// @brief Mocked filterable to expose apply_filters for testing
+class MockFilterable : public Filterable
+{
+public:
+    bool apply_filters(const Record& entry)
+    {
+        return Filterable::apply_filters(entry);
+    }
+};
+
 TEST_CASE("Filterable: move semantics")
 {
     Filterable original{};
@@ -71,4 +81,39 @@ TEST_CASE("Filterable.Clear_filters")
     REQUIRE(uut.num_filters() == 2);
     uut.clear_filters();
     REQUIRE(uut.num_filters() == 0);
+}
+
+TEST_CASE("Filterable.apply_filters")
+{
+    MockFilterable uut{};
+
+    // adding these two filters create a band-pass of log levels debug, info and warn
+    uut.add_filter(std::static_pointer_cast<IFilter>(
+        std::make_shared<LevelFilter>(LogLevel::debug, AcceptanceType::min, "filter1")));
+    uut.add_filter(std::static_pointer_cast<IFilter>(
+        std::make_shared<LevelFilter>(LogLevel::warn, AcceptanceType::max, "filter2")));
+
+    // create placeholder record
+    auto entry = Record{};
+    entry.logger_id_ = "test logger";
+    entry.message_ = "Hello test!";
+
+    // loop thru all levels
+    for (int i = (int)LogLevel::all; i <= (int)LogLevel::fatal; i++)
+    {
+        // apply level to record
+        entry.level_ = (LogLevel)i;
+
+        // ensure three allowable entries pass
+        if (entry.level_ == LogLevel::debug || entry.level_ == LogLevel::info ||
+            entry.level_ == LogLevel::warn)
+        {
+            REQUIRE(uut.apply_filters(entry));
+        }
+        // ensure all other entires fail
+        else
+        {
+            REQUIRE_FALSE(uut.apply_filters(entry));
+        }
+    }
 }

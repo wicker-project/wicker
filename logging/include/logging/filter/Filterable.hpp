@@ -4,8 +4,8 @@
 #ifndef LOGGING_FILTERS_FILTERABLE_HPP_
 #define LOGGING_FILTERS_FILTERABLE_HPP_
 
+#include "../utils.hpp"
 #include "IFilter.hpp"
-#include "utils.hpp"
 #include <memory>
 #include <unordered_map>
 
