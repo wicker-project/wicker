@@ -6,10 +6,6 @@
 using namespace wicker;
 using namespace logging;
 
-StreamTarget::StreamTarget() :
-    stream_{nullptr}
-{}
-
 StreamTarget::StreamTarget(std::ostream& stream) :
     stream_{&stream}
 {}

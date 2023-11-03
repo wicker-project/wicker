@@ -44,6 +44,7 @@ public:
     /**
      * @brief Add a new logger to the service
      * @param logger logger to move into service
+     * @return true if logger added successfully, else false
      */
     static bool add_logger(const Logger& logger);
 

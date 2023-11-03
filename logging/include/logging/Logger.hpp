@@ -22,14 +22,27 @@ namespace logging
 class Logger : public Filterable
 {
 public:
+    /**
+     * @brief Construct a new Logger object
+     *
+     */
     Logger() :
         id_{"root"}
     {}
 
+    /**
+     * @brief Construct a new Logger object
+     *
+     * @param id identification string for logger
+     */
     Logger(std::string id) :
         id_{id}
     {}
 
+    /**
+     * @brief Destroy the Logger object
+     *
+     */
     ~Logger() = default;
 
     // Logger(const Logger& to_copy);
@@ -38,6 +51,11 @@ public:
     // Logger& operator=(Logger&& to_move_assign);
 
     // data accessors
+    /**
+     * @brief retrieve the logger's id.
+     *
+     * @return std::string identification string for logger
+     */
     inline std::string id() const
     {
         return id_;
@@ -53,9 +71,8 @@ public:
     // void fatal(std::string&& message);
 
 protected:
+    /// @brief logger's identification
     std::string id_{"root"};
-
-private:
 };
 
 } // namespace logging

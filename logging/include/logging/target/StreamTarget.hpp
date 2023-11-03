@@ -25,19 +25,14 @@ class StreamTarget : public ITarget
 public:
     /**
      * @brief Construct a new Stream Target object
+     * @param stream target stream reference. Defaults to std::cout
      */
-    StreamTarget();
+    explicit StreamTarget(std::ostream& stream = std::cout);
 
     /**
      * @brief Destroy the Stream Target object
      */
     ~StreamTarget() = default;
-
-    /**
-     * @brief Construct a new Stream Target object
-     * @param stream target stream reference
-     */
-    explicit StreamTarget(std::ostream& stream);
 
     /**
      * @brief Copy construct a new Stream Target object
