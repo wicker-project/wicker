@@ -1,7 +1,12 @@
+// SPDX-FileCopyrightText: © 2023 The Wicker Project
+// SPDX-License-Identifier: Modified MIT
+
 #include "LoggingService.hpp"
+#include "filter/LevelFilter.hpp"
 #include <iostream>
 #include <memory>
 
+using namespace wicker;
 using namespace logging;
 
 // definition of static object instances
@@ -25,7 +30,7 @@ bool LoggingService::add_logger(const Logger& logger)
 
     if (singleton_->loggers_.find(logger.id()) == singleton_->loggers_.cend())
     {
-        singleton_->loggers_[logger.id()] = std::make_unique<Logger>(logger);
+        singleton_->loggers_[logger.id()] = std::move(std::make_unique<Logger>(logger));
         return true;
     }
     return false;

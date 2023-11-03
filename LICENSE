@@ -14,6 +14,14 @@ Since the software distributed by The Wicker Project is open source and free
 of licensing fees, you are free to use, modify, and distribute the source 
 code, as long as you include this copyright statement.
 
+THE WICKER PROJECT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO 
+EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES 
+OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS IN THE WICKER PROJECT SOFTWARE.
+
 In particular, you can use software distributed by The Wicker Project to build 
 proprietary software and are under no obligation to redistribute any of your 
 source code that is built using Wicker Project Software. Note however, that 
@@ -23,20 +31,13 @@ that will prevent it from being distributed freely using an open source
 development model. 
 
 If you choose to modify Wicker Project Software, you are able to do so as a 
-private fork and maintain the project for your own use. In doing so, you may 
-update the copyright statement to your own, copyright if and only if you do 
+private fork and maintain the fork for your own use. In doing so, you may 
+update the copyright statement to your own copyright if and only if you do 
 so with the inclusion of the following statement:
 
-"This code is a private fork of software developed by The Wicker Project under 
-a free and open source software license (Modified MIT)."
+"This code is a private fork of software developed by The Wicker Project 
+originally under a free and open source software license (Modified MIT)."
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Wicker Project Software.
-
-THE WICKER PROJECT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF 
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO 
-EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES 
-OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
-DEALINGS IN THE WICKER PROJECT SOFTWARE.
+ssssss

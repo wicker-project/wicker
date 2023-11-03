@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: © 2023 The Wicker Project
+// SPDX-License-Identifier: Modified MIT
+
 #ifndef COMMON_IMANAGER_HPP_
 #define COMMON_IMANAGER_HPP_
 

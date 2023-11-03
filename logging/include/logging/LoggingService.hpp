@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: © 2023 The Wicker Project
+// SPDX-License-Identifier: Modified MIT
+
 #ifndef LOGGING_LOGGING_SERVICE_HPP_
 #define LOGGING_LOGGING_SERVICE_HPP_
 
@@ -6,8 +9,11 @@
 #include <mutex>
 #include <unordered_map>
 
+namespace wicker
+{
 namespace logging
 {
+/// @brief Singleton service to manage all application loggers
 class LoggingService
 {
 public:
@@ -38,6 +44,7 @@ public:
     /**
      * @brief Add a new logger to the service
      * @param logger logger to move into service
+     * @return true if logger added successfully, else false
      */
     static bool add_logger(const Logger& logger);
 
@@ -82,5 +89,6 @@ private:
     static std::mutex lock_;
 };
 } // namespace logging
+} // namespace wicker
 
 #endif // LOGGING_LOGGING_SERVICE_HPP_
