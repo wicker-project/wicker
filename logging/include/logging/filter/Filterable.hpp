@@ -1,5 +1,7 @@
-#ifndef LOGGING_FILTERS_FILTERABLE_HPP_
+// SPDX-FileCopyrightText: © 2023 The Wicker Project
+// SPDX-License-Identifier: Modified MIT
 
+#ifndef LOGGING_FILTERS_FILTERABLE_HPP_
 #define LOGGING_FILTERS_FILTERABLE_HPP_
 
 #include "IFilter.hpp"

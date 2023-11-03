@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: © 2023 The Wicker Project
+// SPDX-License-Identifier: Modified MIT
+
 #ifndef LOGGING_TARGET_STREAM_TARGET_HPP_
 #define LOGGING_TARGET_STREAM_TARGET_HPP_
 
@@ -13,6 +16,10 @@ namespace wicker
 namespace logging
 {
 
+/**
+ * @brief Logging target for streams such as std::cout and std::err
+ *
+ */
 class StreamTarget : public ITarget
 {
 public:
@@ -29,9 +36,8 @@ public:
     /**
      * @brief Construct a new Stream Target object
      * @param stream target stream reference
-     * @param terminator termination characters to use. defaults to "\n" (0x0A)
      */
-    explicit StreamTarget(std::ostream& stream, const std::string& terminator = "\n");
+    explicit StreamTarget(std::ostream& stream);
 
     /**
      * @brief Copy construct a new Stream Target object
@@ -68,8 +74,6 @@ public:
 private:
     /// @brief pointer to the target stream
     std::ostream* stream_{nullptr};
-    /// @brief termination character of stream. defaults to "\n" (0x0A)
-    std::string terminator_{"\n"};
 };
 
 } // namespace logging

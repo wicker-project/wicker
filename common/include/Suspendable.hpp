@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: © 2023 The Wicker Project
+// SPDX-License-Identifier: Modified MIT
+
 #ifndef COMMON_SUSPENDABLE_HPP_
 #define COMMON_SUSPENDABLE_HPP_
 

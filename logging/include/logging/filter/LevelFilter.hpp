@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: © 2023 The Wicker Project
+// SPDX-License-Identifier: Modified MIT
+
 #ifndef LOGGING_LEVEL_FILTER_HPP_
 #define LOGGING_LEVEL_FILTER_HPP_
 
