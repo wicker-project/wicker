@@ -57,6 +57,12 @@ public:
      */
     Filterable& operator=(Filterable&& to_move_assign);
 
+    /**
+     * @brief Adds filter to the collection keyed by name
+     * @tparam T Derived filter type
+     * @param filter filter to add to the collection
+     * @return true if filter added successfully, else false
+     */
     template <typename T, std::enable_if_t<std::is_base_of<IFilter, T>::value, bool> = true>
     bool add_filter(const T& filter)
     {
