@@ -57,14 +57,13 @@ public:
      */
     Filterable& operator=(Filterable&& to_move_assign);
 
-    /**
-     * @brief Adds a filter to collection by its base interface (strategy pattern)
-     * @param filter Filter to add to collection
-     * @return true if successfully added, else false
-     */
-    inline bool add_filter(const std::shared_ptr<IFilter> filter)
+    template <typename T, std::enable_if_t<std::is_base_of<IFilter, T>::value, bool> = true>
+    bool add_filter(const T& filter)
     {
-        auto res = filters_.emplace(filter->name(), filter);
+        // create shared pointer to filter, and cast to IFilter base before storing
+        auto filterPtr = std::static_pointer_cast<IFilter>(std::make_shared<T>(filter));
+        auto res = filters_.emplace(filter.name(), filterPtr);
+        // return result boolean of the emplace call
         return res.second;
     }
 

@@ -20,11 +20,8 @@ TEST_CASE("Filterable: move semantics")
 {
     Filterable original{};
     Filterable move_assign{};
-
-    original.add_filter(std::static_pointer_cast<IFilter>(
-        std::make_shared<LevelFilter>(LogLevel::debug, AcceptanceType::min, "filter1")));
-    original.add_filter(std::static_pointer_cast<IFilter>(
-        std::make_shared<LevelFilter>(LogLevel::warn, AcceptanceType::max, "filter2")));
+    original.add_filter(LevelFilter{LogLevel::debug, AcceptanceType::min, "filter1"});
+    original.add_filter(LevelFilter{LogLevel::debug, AcceptanceType::max, "filter2"});
 
     Filterable move{std::move(original)};
     REQUIRE(move.num_filters() == 2);
@@ -39,18 +36,16 @@ TEST_CASE("Filterable.add_filter")
     REQUIRE(uut.num_filters() == 0);
 
     // successfully add a filter
-    auto filter1 = std::make_shared<LevelFilter>(LogLevel::debug, AcceptanceType::min);
-    REQUIRE(uut.add_filter(std::static_pointer_cast<IFilter>(filter1)));
+    REQUIRE(uut.add_filter(LevelFilter{LogLevel::debug, AcceptanceType::min}));
     REQUIRE(uut.num_filters() == 1);
 
     // unsuccessfully add filter of the same id
-    REQUIRE_FALSE(uut.add_filter(std::static_pointer_cast<IFilter>(filter1)));
+    REQUIRE_FALSE(uut.add_filter(LevelFilter{LogLevel::debug, AcceptanceType::min}));
     REQUIRE(uut.num_filters() == 1);
 
     // successfully add another filter of the same type, but name
-    auto filter2 =
-        std::make_shared<LevelFilter>(LogLevel::warn, AcceptanceType::max, "warning level filter");
-    REQUIRE(uut.add_filter(std::static_pointer_cast<IFilter>(filter2)));
+    auto filter2 = LevelFilter{LogLevel::warn, AcceptanceType::max, "warning level filter"};
+    REQUIRE(uut.add_filter(filter2));
     REQUIRE(uut.num_filters() == 2);
 }
 
@@ -58,10 +53,8 @@ TEST_CASE("Filterable.remove_filter")
 {
     Filterable uut{};
 
-    uut.add_filter(std::static_pointer_cast<IFilter>(
-        std::make_shared<LevelFilter>(LogLevel::debug, AcceptanceType::min, "filter1")));
-    uut.add_filter(std::static_pointer_cast<IFilter>(
-        std::make_shared<LevelFilter>(LogLevel::warn, AcceptanceType::max, "filter2")));
+    uut.add_filter(LevelFilter{LogLevel::debug, AcceptanceType::min, "filter1"});
+    uut.add_filter(LevelFilter{LogLevel::warn, AcceptanceType::max, "filter2"});
 
     // successfully remove existing filter
     REQUIRE(uut.remove_filter("filter2"));
@@ -73,10 +66,8 @@ TEST_CASE("Filterable.Clear_filters")
 {
     Filterable uut{};
 
-    uut.add_filter(std::static_pointer_cast<IFilter>(
-        std::make_shared<LevelFilter>(LogLevel::debug, AcceptanceType::min, "filter1")));
-    uut.add_filter(std::static_pointer_cast<IFilter>(
-        std::make_shared<LevelFilter>(LogLevel::warn, AcceptanceType::max, "filter2")));
+    uut.add_filter(LevelFilter{LogLevel::debug, AcceptanceType::min, "filter1"});
+    uut.add_filter(LevelFilter{LogLevel::warn, AcceptanceType::max, "filter2"});
 
     REQUIRE(uut.num_filters() == 2);
     uut.clear_filters();
@@ -88,10 +79,8 @@ TEST_CASE("Filterable.apply_filters")
     MockFilterable uut{};
 
     // adding these two filters create a band-pass of log levels debug, info and warn
-    uut.add_filter(std::static_pointer_cast<IFilter>(
-        std::make_shared<LevelFilter>(LogLevel::debug, AcceptanceType::min, "filter1")));
-    uut.add_filter(std::static_pointer_cast<IFilter>(
-        std::make_shared<LevelFilter>(LogLevel::warn, AcceptanceType::max, "filter2")));
+    uut.add_filter(LevelFilter{LogLevel::debug, AcceptanceType::min, "filter1"});
+    uut.add_filter(LevelFilter{LogLevel::warn, AcceptanceType::max, "filter2"});
 
     // create placeholder record
     auto entry = Record{};
