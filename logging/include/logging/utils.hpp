@@ -30,36 +30,36 @@ enum LogLevel
  * @param value LogLevel value to get formatted string for
  * @return std::string formatted string matching log level
  */
-static std::string log_level_string(const LogLevel value)
-{
-    switch (value)
-    {
-    case LogLevel::all:
-        return "All";
-        break;
-    case LogLevel::trace:
-        return "Trace";
-        break;
-    case LogLevel::debug:
-        return "Debug";
-        break;
-    case LogLevel::info:
-        return "Info";
-        break;
-    case LogLevel::warn:
-        return "Warning";
-        break;
-    case LogLevel::error:
-        return "Error";
-        break;
-    case LogLevel::fatal:
-        return "Fatal";
-        break;
-    default:
-        return "Invalid";
-        break;
-    }
-}
+// static std::string log_level_string(const LogLevel value)
+//{
+//     switch (value)
+//     {
+//     case LogLevel::all:
+//         return "All";
+//         break;
+//     case LogLevel::trace:
+//         return "Trace";
+//         break;
+//     case LogLevel::debug:
+//         return "Debug";
+//         break;
+//     case LogLevel::info:
+//         return "Info";
+//         break;
+//     case LogLevel::warn:
+//         return "Warning";
+//         break;
+//     case LogLevel::error:
+//         return "Error";
+//         break;
+//     case LogLevel::fatal:
+//         return "Fatal";
+//         break;
+//     default:
+//         return "Invalid";
+//         break;
+//     }
+// }
 
 /**
  * @brief Structure defining a singular log entry record.

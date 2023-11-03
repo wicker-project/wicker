@@ -5,6 +5,7 @@
 #define LOGGING_FILTERS_FILTERABLE_HPP_
 
 #include "IFilter.hpp"
+#include "utils.hpp"
 #include <memory>
 #include <unordered_map>
 
@@ -82,7 +83,7 @@ public:
      * @param filter_name name of filter to remove
      * @return true if filter found and removed, else false
      */
-    bool remove_filter(std::string& filter_name);
+    bool remove_filter(const std::string& filter_name);
 
     /**
      * @brief Remove all filters from collection

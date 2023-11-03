@@ -5,7 +5,6 @@
 #define LOGGING_LOGGER_HPP_
 
 #include "filter/Filterable.hpp"
-#include "utils.hpp"
 #include <memory>
 #include <mutex>
 #include <string>

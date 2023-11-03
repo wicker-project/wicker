@@ -4,7 +4,6 @@
 #ifndef LOGGING_FILTERS_IFILTER_HPP_
 #define LOGGING_FILTERS_IFILTER_HPP_
 
-#include "../utils.hpp"
 #include <string>
 
 namespace wicker

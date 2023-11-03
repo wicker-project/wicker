@@ -95,3 +95,52 @@ TEST_CASE("LevelFilter.execute exclude strategy")
         }
     }
 }
+
+TEST_CASE("LevelFilter.execute: bad acceptance type")
+{
+    // create a filter with an invalid acceptance type - clearly misused
+    auto uut = LevelFilter{LogLevel::debug, (AcceptanceType)-1};
+
+    auto entry = Record{};
+    // loop over all levels
+    for (int i = (int)LogLevel::all; i <= (int)LogLevel::fatal; i++)
+    {
+        entry.level_ = (LogLevel)i;
+        // ensure execute always returns false - bad acceptance type
+        REQUIRE_FALSE(uut.execute(entry));
+    }
+}
+
+TEST_CASE("LevelFilter: copy semantics")
+{
+    auto original = LevelFilter{LogLevel::debug, AcceptanceType::max};
+    LevelFilter copy_assign{};
+
+    auto entry = Record{};
+    entry.level_ = LogLevel::debug;
+
+    // copy construct Filter and verify valid result
+    LevelFilter copy{original};
+    REQUIRE(copy.execute(entry));
+
+    // copy assign Filter and verify valid result
+    copy_assign = original;
+    REQUIRE(copy_assign.execute(entry));
+}
+
+TEST_CASE("LevelFilter: move semantics")
+{
+    auto original = LevelFilter{LogLevel::debug, AcceptanceType::max};
+    LevelFilter move_assign{};
+
+    auto entry = Record{};
+    entry.level_ = LogLevel::debug;
+
+    // copy construct Filter and verify valid result
+    LevelFilter move{std::move(original)};
+    REQUIRE(move.execute(entry));
+
+    // copy assign Filter and verify valid result
+    move_assign = std::move(move);
+    REQUIRE(move_assign.execute(entry));
+}

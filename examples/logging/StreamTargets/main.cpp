@@ -5,17 +5,16 @@
 
 int main(int argc, char const* argv[])
 {
-    std::stringstream target_{};
-    wicker::logging::StreamTarget logStream{};
-    wicker::logging::StreamTarget copyStream{};
-    wicker::logging::StreamTarget moveStream{};
-    logStream.write("Hello from the real world!\n");
+    // uses std::cout by default
+    wicker::logging::StreamTarget log_stream{};
 
-    copyStream = logStream;
-    copyStream.write("Hello from the copy world!\n");
+    // push message onto the stream
+    log_stream.write("Hello from a logging stream target!\n");
 
-    moveStream = std::move(logStream);
-    moveStream.write("Hello from the move world!\n");
-    /* code */
+    // specify a local stream target, and write data there
+    std::stringstream local_stream{};
+    wicker::logging::StreamTarget log_local_target{local_stream};
+    log_local_target.write("Writes data into local_stream, and not to cout.\n");
+
     return 0;
 }

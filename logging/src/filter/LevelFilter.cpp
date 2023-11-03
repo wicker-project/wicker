@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: © 2023 The Wicker Project
 // SPDX-License-Identifier: Modified MIT
 
-#include "LevelFilter.hpp"
+#include "filter/LevelFilter.hpp"
 
 using namespace wicker;
 using namespace logging;

@@ -16,7 +16,7 @@ Filterable& Filterable::operator=(Filterable&& to_move_assign)
     return *this;
 }
 
-bool Filterable::remove_filter(std::string& filter_name)
+bool Filterable::remove_filter(const std::string& filter_name)
 {
     // remove filter if exists in collection
     if (filters_.find(filter_name) != filters_.cend())

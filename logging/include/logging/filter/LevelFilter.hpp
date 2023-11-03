@@ -25,7 +25,6 @@ enum AcceptanceType
 
 /**
  * @brief Filter to log records based on log level.
- *
  */
 class LevelFilter : public IFilter
 {
