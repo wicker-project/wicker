@@ -18,7 +18,7 @@ public:
     /**
      * @brief Interface method (strategy pattern) for all targets
      *
-     * @param payload
+     * @param payload string data to write to the target
      */
     virtual void write(const std::string& payload) = 0;
 };
