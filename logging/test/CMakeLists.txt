@@ -7,6 +7,7 @@ add_executable(WickerLogging_UT
     LoggingService_ut.cpp
     filter/LevelFilter_ut.cpp
     filter/Filterable_ut.cpp
+    target/FileTarget_ut.cpp
     target/StreamTarget_ut.cpp)
 
 target_link_libraries(WickerLogging_UT PUBLIC 

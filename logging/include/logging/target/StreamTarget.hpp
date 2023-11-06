@@ -4,7 +4,6 @@
 #ifndef LOGGING_TARGET_STREAM_TARGET_HPP_
 #define LOGGING_TARGET_STREAM_TARGET_HPP_
 
-//#include "TargetBase.hpp"
 #include "ITarget.hpp"
 #include <iostream>
 #include <memory>
@@ -18,7 +17,6 @@ namespace logging
 
 /**
  * @brief Logging target for streams such as std::cout and std::err
- *
  */
 class StreamTarget : public ITarget
 {
@@ -61,7 +59,7 @@ public:
     StreamTarget& operator=(StreamTarget&& to_move_assign);
 
     /**
-     * @brief override of required interface method to write data to target
+     * @brief override of interface method to write data to target
      * @param payload string data to write to the stream
      */
     void write(const std::string& payload) override;

@@ -1,6 +1,7 @@
 add_library(WickerLoggingLib
     LoggingService.cpp
     target/StreamTarget.cpp
+    target/FileTarget.cpp
     filter/LevelFilter.cpp
     filter/Filterable.cpp
     )

@@ -1,1 +1,2 @@
+add_subdirectory(ReferenceCast)
 add_subdirectory(StreamTargets)
